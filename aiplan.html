@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리들의 다이어리 - 통합 앱</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="frontend/styles.css">
+</head>
+<body class="antialiased">
+
+    <!-- =========== Landing Page Container =========== -->
+    <div id="landing-page">
+        <header class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-sm">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div class="text-xl font-bold text-[#a58358]"><i class="fas fa-book-open mr-2"></i>우리들의 다이어리</div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-[#a58358]">핵심 기능</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-[#a58358]">작동 방식</a>
+                </nav>
+                <a href="#" class="nav-to-login btn-primary py-2 px-5 rounded-full font-bold hidden md:block">시작하기</a>
+            </div>
+        </header>
+
+        <section class="hero-section pt-32 pb-20 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-black text-[#8c6d48] leading-tight mb-4 fade-in" style="transition-delay: 0.2s;">당신의 모든 날을<br>특별한 이야기로.</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8 fade-in" style="transition-delay: 0.4s;">흩어져 있던 소중한 순간들, AI가 자동으로 찾아 하나의 이야기로 엮어드려요.<br>'우리들의 다이어리'와 함께 잊고 있던 추억을 다시 만나보세요.</p>
+                <a href="#" class="nav-to-login btn-primary py-4 px-10 rounded-full font-bold text-lg inline-block fade-in" style="transition-delay: 0.6s;">
+                    지금 바로 시작하기 <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <!-- App Screenshot Div Removed -->
+            </div>
+        </section>
+        
+        <section id="features" class="py-20 bg-white">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title mb-12">당신의 일상이 특별해지는 이유</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card p-8 fade-in"><div class="text-4xl text-[#a58358] mb-4"><i class="fas fa-brain"></i></div><h3 class="text-xl font-bold mb-2">✨ AI 추억 큐레이션</h3><p class="text-gray-500">캘린더와 메모를 분석해 Gemini AI가 자동으로 지난날의 이야기를 만들어줘요.</p></div>
+                    <div class="feature-card p-8 fade-in" style="transition-delay: 0.2s;"><div class="text-4xl text-[#a58358] mb-4"><i class="fas fa-bell"></i></div><h3 class="text-xl font-bold mb-2">지능형 알림</h3><p class="text-gray-500">중요한 약속은 물론, 작년 오늘의 추억까지 잊지 않게 챙겨줘요.</p></div>
+                    <div class="feature-card p-8 fade-in" style="transition-delay: 0.4s;"><div class="text-4xl text-[#a58358] mb-4"><i class="fas fa-robot"></i></div><h3 class="text-xl font-bold mb-2">✨ AI 챗봇 대화</h3><p class="text-gray-500">Gemini AI 기반 챗봇과 기념일 계산부터 어떤 주제든 자유롭게 대화하세요.</p></div>
+                    <div class="feature-card p-8 fade-in" style="transition-delay: 0.6s;"><div class="text-4xl text-[#a58358] mb-4"><i class="fas fa-users"></i></div><h3 class="text-xl font-bold mb-2">공유 다이어리</h3><p class="text-gray-500">연인, 가족, 친구와 함께 공동의 추억을 쌓고 함께 되돌아보세요.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="py-20">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title mb-12">3초면 충분해요</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                    <div class="text-center max-w-xs fade-in"><div class="text-5xl font-black text-amber-200 mb-2">1</div><div class="text-3xl text-[#a58358] mb-4"><i class="fas fa-pen-nib"></i></div><h3 class="text-xl font-bold mb-2">기록하고</h3><p class="text-gray-500">캘린더에 일정을 기록하거나, 간단한 메모를 남겨주세요.</p></div>
+                    <div class="text-4xl text-amber-200 hidden md:block fade-in">&rarr;</div>
+                    <div class="text-4xl text-amber-200 md:hidden fade-in">&darr;</div>
+                    <div class="text-center max-w-xs fade-in" style="transition-delay: 0.3s;"><div class="text-5xl font-black text-amber-200 mb-2">2</div><div class="text-3xl text-[#a58358] mb-4"><i class="fas fa-magic"></i></div><h3 class="text-xl font-bold mb-2">✨ AI가 분석하고</h3><p class="text-gray-500">AI가 기록 속에서 핵심 키워드와 감성을 찾아내요.</p></div>
+                    <div class="text-4xl text-amber-200 hidden md:block fade-in">&rarr;</div>
+                    <div class="text-4xl text-amber-200 md:hidden fade-in">&darr;</div>
+                    <div class="text-center max-w-xs fade-in" style="transition-delay: 0.6s;"><div class="text-5xl font-black text-amber-200 mb-2">3</div><div class="text-3xl text-[#a58358] mb-4"><i class="fas fa-gift"></i></div><h3 class="text-xl font-bold mb-2">추억을 발견해요</h3><p class="text-gray-500">과거의 오늘, AI가 선물처럼 당신의 이야기를 들려줄 거예요.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-8 bg-[#f1e9de]">
+            <div class="container mx-auto px-6 text-center text-[#a58358]">
+                <p>&copy; 2025 우리들의 다이어리. All Rights Reserved.</p>
+                <div class="mt-4 space-x-6"><a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a><a href="#" class="hover:text-black"><i class="fab fa-facebook"></i></a><a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a></div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- =========== Login Page Container =========== -->
+    <div id="login-page" class="hidden page p-6">
+        <div class="auth-card w-full max-w-md p-8 md:p-10 space-y-6">
+            <div class="text-center"><h1 class="text-3xl font-bold text-[#a58358] mb-2"><i class="fas fa-book-open mr-2"></i>우리들의 다이어리</h1><p class="text-gray-500">당신의 이야기를 시작해보세요</p></div>
+            
+            <form id="login-form" class="space-y-4">
+                <div><label for="login-id" class="text-sm font-semibold text-gray-600">아이디 또는 이메일</label><input type="text" id="login-id" placeholder="아이디 또는 이메일을 입력하세요" class="input-field w-full p-3 mt-1 rounded-lg transition"></div>
+                <div><div class="flex justify-between items-baseline"><label for="password" class="text-sm font-semibold text-gray-600">비밀번호</label><a href="#" class="text-xs text-gray-500 hover:text-[#a58358]">비밀번호를 잊으셨나요?</a></div><input type="password" id="password" placeholder="비밀번호" class="input-field w-full p-3 mt-1 rounded-lg transition"></div>
+                <button type="submit" class="nav-to-app btn-primary w-full py-3 rounded-lg font-bold text-lg">로그인</button>
+            </form>
+
+            <div class="flex items-center"><hr class="flex-grow border-gray-200"><span class="mx-4 text-sm text-gray-400">또는</span><hr class="flex-grow border-gray-200"></div>
+
+            <div><button class="nav-to-app btn-social w-full flex items-center justify-center py-3 px-4 border border-gray-300 rounded-lg text-gray-700 font-semibold"><svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.222,0-9.519-3.483-11.082-8.192l-6.823,5.34C9.442,39.562,16.121,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C39.988,36.213,44,30.669,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg><span>구글로 시작하기</span></button></div>
+            
+            <div class="text-center text-sm"><p class="text-gray-500">계정이 없으신가요? <a href="#" class="nav-to-signup font-semibold text-[#a58358] hover:underline">회원가입</a></p></div>
+        </div>
+    </div>
+    
+    <!-- =========== Signup Page Container =========== -->
+    <div id="signup-page" class="hidden page p-6">
+        <div class="auth-card w-full max-w-md p-8 md:p-10 space-y-6">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold text-[#a58358] mb-2"><i class="fas fa-feather-alt mr-2"></i>새로운 이야기의 시작</h1>
+                <p class="text-gray-500">우리들의 다이어리에 오신 것을 환영해요</p>
+            </div>
+            <form id="signup-form" class="space-y-4">
+                 <div><label for="nickname" class="text-sm font-semibold text-gray-600">닉네임</label><input type="text" id="nickname" placeholder="사용하실 닉네임을 입력하세요" class="input-field signup-input w-full p-3 mt-1 rounded-lg transition" required></div>
+                 <div><label for="signup-id" class="text-sm font-semibold text-gray-600">아이디</label><input type="text" id="signup-id" placeholder="로그인 시 사용할 아이디를 입력하세요" class="input-field signup-input w-full p-3 mt-1 rounded-lg transition" required></div>
+                <div><label for="signup-password" class="text-sm font-semibold text-gray-600">비밀번호</label><input type="password" id="signup-password" placeholder="비밀번호" class="input-field signup-input w-full p-3 mt-1 rounded-lg transition" required></div>
+                <div><label for="confirm-password" class="text-sm font-semibold text-gray-600">비밀번호 확인</label><input type="password" id="confirm-password" placeholder="비밀번호 확인" class="input-field signup-input w-full p-3 mt-1 rounded-lg transition" required></div>
+                
+                <div>
+                    <div class="flex justify-between items-baseline">
+                        <label for="signup-email" class="text-sm font-semibold text-gray-600">이메일 (인증용)</label>
+                        <button id="edit-email-btn" type="button" class="hidden text-xs font-semibold text-[#a58358] hover:underline">수정</button>
+                    </div>
+                    <div class="flex space-x-2 mt-1">
+                        <input type="email" id="signup-email" placeholder="email@example.com" class="input-field signup-input w-full p-3 rounded-lg transition flex-grow" required>
+                        <button id="send-verification-btn" type="button" class="bg-gray-200 text-gray-600 font-semibold px-4 rounded-lg hover:bg-gray-300 transition shrink-0">인증번호 전송</button>
+                    </div>
+                </div>
+                <div id="verification-code-section" class="hidden">
+                     <label for="verification-code" class="text-sm font-semibold text-gray-600">인증번호</label>
+                     <div class="relative mt-1">
+                        <input type="text" id="verification-code" placeholder="인증번호 6자리를 입력하세요" class="input-field signup-input w-full p-3 rounded-lg transition" required>
+                        <span id="timer" class="absolute right-3 top-1/2 -translate-y-1/2 text-red-500 text-sm font-semibold">3:00</span>
+                     </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center">
+                        <input id="terms" name="terms" type="checkbox" class="signup-input h-4 w-4 rounded border-gray-300 text-[#a58358] focus:ring-[#a58358]">
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">이용약관에 동의합니다. (필수)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="privacy" name="privacy" type="checkbox" class="signup-input h-4 w-4 rounded border-gray-300 text-[#a58358] focus:ring-[#a58358]">
+                        <label for="privacy" class="ml-2 block text-sm text-gray-700">개인정보 수집 및 이용에 동의합니다. (필수)</label>
+                    </div>
+                </div>
+
+                <button id="signup-btn" type="submit" class="btn-primary w-full py-3 rounded-lg font-bold text-lg" disabled>회원가입</button>
+            </form>
+            <div class="text-center text-sm">
+                <p class="text-gray-500">이미 계정이 있으신가요? <a href="#" class="nav-to-login-from-signup font-semibold text-[#a58358] hover:underline">로그인</a></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========== App Page Container =========== -->
+    <div id="app-page" class="hidden page p-4 md:p-8">
+         <div class="app-container w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden">
+            <div class="w-full md:w-1/2 lg:w-2/5 p-6 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col">
+                <header class="mb-6 flex justify-between items-start">
+                    <div>
+                        <h1 class="text-2xl font-bold text-[#a58358]"><i class="fas fa-book-open mr-2"></i>우리들의 다이어리</h1>
+                        <p class="text-sm text-gray-500 mt-1">당신의 모든 날을 특별하게</p>
+                    </div>
+                    <div class="flex space-x-3 items-center">
+                         <button id="nav-to-mypage" class="text-xl text-gray-500 hover:text-[#a58358] transition" title="내 정보"><i class="fas fa-user-circle"></i></button>
+                         <button id="logout-button" class="text-xl text-gray-500 hover:text-red-500 transition" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+                </header>
+                <div id="calendar-container" class="relative">
+                    <div class="flex justify-between items-center mb-4">
+                        <button id="prev-month" class="text-xl font-bold text-gray-500 hover:text-black">&lt;</button>
+                        <h2 id="calendar-month-year" class="text-lg font-bold cursor-pointer hover:text-[#a58358]"></h2>
+                        <button id="next-month" class="text-xl font-bold text-gray-500 hover:text-black">&gt;</button>
+                    </div>
+                     <!-- Date Picker Panel -->
+                    <div id="date-picker-panel" class="absolute top-12 left-0 right-0 z-10 bg-white rounded-lg shadow-lg p-4 hidden">
+                        <div id="month-picker" class="grid grid-cols-4 gap-2 text-center">
+                            <!-- Months will be populated here -->
+                        </div>
+                        <div id="year-picker" class="hidden grid grid-cols-4 gap-2 text-center max-h-60 overflow-y-auto">
+                            <!-- Years will be populated here -->
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-7 text-center text-xs text-gray-500 mb-2"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
+                    <div id="calendar-days" class="grid grid-cols-7"></div>
+                </div>
+                <div class="mt-auto pt-6"><h3 class="font-bold mb-2 text-gray-700">다가오는 약속</h3>
+                    <div id="upcoming-appointments" class="bg-amber-50 p-3 rounded-lg text-sm min-h-[50px]">
+                        <p id="upcoming-placeholder" class="text-gray-500">새로운 약속을 추가하면 알림이 표시됩니다.</p>
+                        <div id="upcoming-list" class="space-y-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-3/5 main-panel p-6 flex flex-col">
+                <div id="memory-display" class="flex-1 mb-6">
+                    <div id="memory-content" class="bg-white p-6 rounded-lg shadow-inner min-h-[200px] flex flex-col">
+                         <h3 id="memory-title" class="font-bold text-lg mb-4 text-[#a58358] hidden"></h3>
+                        <div class="flex-1 flex items-center justify-center text-center" id="memory-placeholder-container">
+                             <p id="memory-placeholder" class="text-gray-400">캘린더에서 날짜를 선택하여<br>기록을 보거나 추가해보세요.</p>
+                        </div>
+                        
+                        <!-- AI Highlight Generator -->
+                        <div id="ai-highlight-generator" class="hidden w-full">
+                            <label for="highlight-keywords" class="text-sm font-semibold text-gray-600">핵심 키워드</label>
+                            <textarea id="highlight-keywords" class="w-full p-2 border rounded-md h-20 mt-1" placeholder="예: 최수아, 강릉 해변, 파도 소리"></textarea>
+                            <button id="generate-highlight-btn" class="btn-gemini w-full py-2 mt-2 rounded-lg font-bold">✨ AI 하이라이트 생성하기</button>
+                            <p class="text-xs text-gray-400 text-center mt-2">AI가 생성한 내용은 사실과 다를 수 있습니다.</p>
+                            <div id="highlight-result" class="mt-4 hidden space-y-4"></div>
+                            <button id="delete-memory-btn" class="btn-danger w-full py-2 mt-4 rounded-lg font-semibold text-sm"><i class="fas fa-trash-alt mr-2"></i>이 기록 삭제하기</button>
+                        </div>
+
+                         <div id="add-memory-form" class="hidden w-full">
+                            <div class="space-y-3">
+                                <input type="text" id="add-memory-headline" placeholder="일정 제목" class="input-field w-full p-2 rounded-lg">
+                                <input type="text" id="add-memory-location" placeholder="장소" class="input-field w-full p-2 rounded-lg">
+                                <textarea id="add-memory-memo" class="input-field w-full p-2 rounded-lg h-24" placeholder="그날의 메모를 남겨보세요..."></textarea>
+                                <div id="email-notify-checkbox-container" class="flex items-center">
+                                    <input id="email-notification-checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-[#a58358] focus:ring-[#a58358]">
+                                    <label for="email-notification-checkbox" class="ml-2 block text-sm text-gray-700">이 일정에 대한 이메일 알림 받기 (시뮬레이션)</label>
+                                </div>
+                                <button id="save-memory-btn" class="btn-primary w-full py-2 rounded-lg font-bold">저장하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="chatbot-widget"><h2 class="text-xl font-bold text-gray-800 mb-4">✨ AI 챗봇</h2><div class="bg-white rounded-lg shadow-inner p-4 h-64 flex flex-col"><div id="chatbot-log" class="flex-1 overflow-y-auto text-sm space-y-3 p-2"><div class="chat-bubble-bot p-3 rounded-lg self-start max-w-xs break-words">안녕하세요! 어떤 대화를 나눠볼까요?</div></div><form id="chatbot-form" class="mt-2 border-t pt-3 flex items-center"><input id="chatbot-input" type="text" class="input-field w-full p-2 rounded-l-lg" placeholder="자유롭게 질문해보세요..."><button type="submit" class="btn-primary px-4 py-2 rounded-r-lg font-bold">전송</button></form></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- =========== My Page Container =========== -->
+    <div id="mypage-page" class="hidden page p-6">
+        <div class="auth-card w-full max-w-md p-8 md:p-10 space-y-6">
+            <div class="flex justify-between items-center mb-4">
+                 <h1 class="text-3xl font-bold text-[#a58358]"><i class="fas fa-user-edit mr-2"></i>회원 정보 수정</h1>
+                 <button id="nav-to-app-from-mypage" class="text-sm font-semibold text-gray-500 hover:text-[#a58358]">돌아가기 &rarr;</button>
+            </div>
+           
+            <form id="mypage-form" class="space-y-4">
+                 <div><label for="mypage-nickname" class="text-sm font-semibold text-gray-600">닉네임</label><input type="text" id="mypage-nickname" value="데모사용자" class="input-field w-full p-3 mt-1 rounded-lg transition"></div>
+                 <div><label for="mypage-id" class="text-sm font-semibold text-gray-600">아이디</label><input type="text" id="mypage-id" value="demo_user" class="input-field w-full p-3 mt-1 rounded-lg transition" readonly></div>
+                <div><label for="mypage-email" class="text-sm font-semibold text-gray-600">이메일</label><input type="email" id="mypage-email" value="email@example.com" class="input-field w-full p-3 mt-1 rounded-lg transition" readonly></div>
+                
+                <hr class="my-4">
+                
+                <h3 class="text-lg font-semibold text-gray-700">알림 설정</h3>
+                <div class="flex items-center justify-between">
+                    <label for="email-notify-global-toggle" class="text-sm font-semibold text-gray-600">전체 이메일 알림 받기</label>
+                    <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                        <input type="checkbox" name="toggle" id="email-notify-global-toggle" class="toggle-checkbox absolute opacity-0 w-0 h-0" checked/>
+                        <label for="email-notify-global-toggle" class="toggle-label block overflow-hidden h-6 w-10 rounded-full bg-gray-300 cursor-pointer relative"></label>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                
+                <h3 class="text-lg font-semibold text-gray-700">비밀번호 변경</h3>
+                <div><label for="mypage-current-password" class="text-sm font-semibold text-gray-600">현재 비밀번호</label><input type="password" id="mypage-current-password" placeholder="현재 비밀번호" class="input-field w-full p-3 mt-1 rounded-lg transition"></div>
+                <div><label for="mypage-new-password" class="text-sm font-semibold text-gray-600">새 비밀번호</label><input type="password" id="mypage-new-password" placeholder="새 비밀번호" class="input-field w-full p-3 mt-1 rounded-lg transition"></div>
+                <div><label for="mypage-confirm-password" class="text-sm font-semibold text-gray-600">새 비밀번호 확인</label><input type="password" id="mypage-confirm-password" placeholder="새 비밀번호 확인" class="input-field w-full p-3 mt-1 rounded-lg transition"></div>
+
+                <button id="save-profile-btn" type="submit" class="btn-primary w-full py-3 rounded-lg font-bold text-lg">정보 저장</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-10 right-10 bg-green-600 text-white py-3 px-5 rounded-lg shadow-lg hidden opacity-0 transform translate-x-10 z-50">
+        <i class="fas fa-check-circle mr-2"></i><span id="toast-message"></span>
+    </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Page Containers ---
+    const landingPage = document.getElementById('landing-page');
+    const loginPage = document.getElementById('login-page');
+    const signupPage = document.getElementById('signup-page');
+    const appPage = document.getElementById('app-page');
+    const mypagePage = document.getElementById('mypage-page'); 
+
+    // --- Navigation Handlers ---
+    const toLoginButtons = document.querySelectorAll('.nav-to-login');
+    const toSignupButton = document.querySelector('.nav-to-signup');
+    const toLoginFromSignupButton = document.querySelector('.nav-to-login-from-signup');
+    const toAppButtons = document.querySelectorAll('.nav-to-app');
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const logoutButton = document.getElementById('logout-button');
+    const toMypageButton = document.getElementById('nav-to-mypage'); 
+    const toAppFromMypageButton = document.getElementById('nav-to-app-from-mypage'); 
+    const mypageForm = document.getElementById('mypage-form'); 
+
+    // --- App State ---
+    let isEmailNotificationEnabled = true; // Global toggle state, default ON
+
+    function showPage(pageToShow) {
+        landingPage.classList.add('hidden');
+        loginPage.classList.add('hidden');
+        signupPage.classList.add('hidden');
+        appPage.classList.add('hidden');
+        mypagePage.classList.add('hidden'); 
+        pageToShow.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    toLoginButtons.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); showPage(loginPage); }));
+    toAppButtons.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); showPage(appPage); }));
+    
+    toSignupButton.addEventListener('click', (e) => { e.preventDefault(); showPage(signupPage); });
+    toLoginFromSignupButton.addEventListener('click', (e) => { e.preventDefault(); showPage(loginPage); });
+
+    loginForm.addEventListener('submit', (e) => { e.preventDefault(); showPage(appPage); });
+    logoutButton.addEventListener('click', (e) => { e.preventDefault(); showPage(landingPage); });
+    
+    toMypageButton.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        document.getElementById('email-notify-global-toggle').checked = isEmailNotificationEnabled;
+        showPage(mypagePage); 
+    });
+    toAppFromMypageButton.addEventListener('click', (e) => { e.preventDefault(); showPage(appPage); });
+    
+    mypageForm.addEventListener('submit', (e) => {
+         e.preventDefault();
+         isEmailNotificationEnabled = document.getElementById('email-notify-global-toggle').checked;
+         showToastNotification('회원 정보가 (데모) 저장되었습니다.');
+         showPage(appPage);
+    });
+    
+    // --- Landing Page Scroll Animation ---
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.3, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+    
+    // ======================================================
+    // --- SIGNUP PAGE SCRIPT (Verification & Checkbox) ---
+    // ======================================================
+    const sendVerificationBtn = document.getElementById('send-verification-btn');
+    const verificationCodeSection = document.getElementById('verification-code-section');
+    const timerDisplay = document.getElementById('timer');
+    const signupEmailInput = document.getElementById('signup-email');
+    const editEmailBtn = document.getElementById('edit-email-btn');
+    const signupBtn = document.getElementById('signup-btn');
+    const signupInputs = document.querySelectorAll('.signup-input'); 
+
+    let timerInterval;
+    let timeLeft = 180;
+
+    function checkSignupFormState() {
+        const areTextFieldsFilled = Array.from(signupInputs)
+            .filter(input => input.type !== 'checkbox') 
+            .every(input => {
+                if (input.id === 'verification-code') {
+                    return verificationCodeSection.classList.contains('hidden') || input.value.trim() !== '';
+                }
+                return input.value.trim() !== '';
+            });
+
+        const areCheckboxesChecked = Array.from(signupInputs)
+            .filter(input => input.type === 'checkbox')
+            .every(checkbox => checkbox.checked);
+
+        const password = document.getElementById('signup-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const doPasswordsMatch = password === confirmPassword && password !== '';
+
+        signupBtn.disabled = !(areTextFieldsFilled && areCheckboxesChecked && doPasswordsMatch);
+    }
+
+
+    signupInputs.forEach(input => {
+        const eventType = (input.type === 'checkbox') ? 'change' : 'input';
+        input.addEventListener(eventType, checkSignupFormState);
+    });
+
+    sendVerificationBtn.addEventListener('click', () => {
+        if (!signupEmailInput.value || !signupEmailInput.value.includes('@')) {
+            alert('올바른 이메일 주소를 입력해주세요.');
+            return;
+        }
+
+        signupEmailInput.readOnly = true;
+        sendVerificationBtn.classList.add('hidden');
+        editEmailBtn.classList.remove('hidden');
+        verificationCodeSection.classList.remove('hidden');
+        
+        timeLeft = 180;
+        clearInterval(timerInterval);
+        timerDisplay.textContent = `3:00`;
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = '시간 초과';
+            }
+        }, 1000);
+        checkSignupFormState(); 
+    });
+
+    editEmailBtn.addEventListener('click', () => {
+        signupEmailInput.readOnly = false;
+        sendVerificationBtn.classList.remove('hidden');
+        editEmailBtn.classList.add('hidden');
+        verificationCodeSection.classList.add('hidden');
+        document.getElementById('verification-code').value = '';
+        clearInterval(timerInterval);
+        checkSignupFormState(); 
+    });
+
+    signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (signupBtn.disabled) {
+            alert('입력 양식을 모두 채우고 약관에 동의해주세요.');
+            return;
+        }
+        
+        document.getElementById('mypage-nickname').value = document.getElementById('nickname').value;
+        document.getElementById('mypage-id').value = document.getElementById('signup-id').value;
+        document.getElementById('mypage-email').value = document.getElementById('signup-email').value;
+
+        showPage(appPage);
+    });
+
+
+    // ===============================================
+    // --- APP PAGE SCRIPT (Calendar & Chatbot) ---
+    // ===============================================
+    const memoryPlaceholderContainer = document.getElementById('memory-placeholder-container');
+    const memoryTitle = document.getElementById('memory-title');
+    const calendarMonthYear = document.getElementById('calendar-month-year');
+    const calendarDays = document.getElementById('calendar-days');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    
+    const aiHighlightGenerator = document.getElementById('ai-highlight-generator');
+    const highlightKeywords = document.getElementById('highlight-keywords');
+    const generateHighlightBtn = document.getElementById('generate-highlight-btn');
+    const highlightResult = document.getElementById('highlight-result');
+    const deleteMemoryBtn = document.getElementById('delete-memory-btn');
+    
+    const chatbotLog = document.getElementById('chatbot-log');
+    const chatbotForm = document.getElementById('chatbot-form');
+    const chatbotInput = document.getElementById('chatbot-input');
+    
+    const addMemoryForm = document.getElementById('add-memory-form');
+    const saveMemoryBtn = document.getElementById('save-memory-btn');
+    const emailNotificationCheckboxContainer = document.getElementById('email-notify-checkbox-container');
+    const emailNotificationCheckbox = document.getElementById('email-notification-checkbox');
+    
+    const datePickerPanel = document.getElementById('date-picker-panel');
+    const monthPicker = document.getElementById('month-picker');
+    const yearPicker = document.getElementById('year-picker');
+    
+    const upcomingList = document.getElementById('upcoming-list');
+    const upcomingPlaceholder = document.getElementById('upcoming-placeholder');
+    
+    const toastNotification = document.getElementById('toast-notification');
+    const toastMessage = document.getElementById('toast-message');
+
+
+    let currentDate = new Date(); 
+    let selectedDayEl = null;
+    let currentSelectedDate = null;
+    let isYearPickerVisible = false;
+    const memories = {}; 
+
+    // --- Toast Notification Function ---
+    function showToastNotification(message) {
+        toastMessage.textContent = message;
+        toastNotification.classList.remove('hidden');
+        setTimeout(() => {
+            toastNotification.classList.add('toast-show');
+        }, 10); 
+
+        setTimeout(() => {
+            toastNotification.classList.remove('toast-show');
+            setTimeout(() => {
+                toastNotification.classList.add('hidden');
+            }, 300);
+        }, 3000); 
+    }
+
+    // --- Gemini API Fetch Utility with Backoff ---
+    async function fetchWithBackoff(apiUrl, payload, retries = 3, delay = 1000) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (response.ok) {
+                    return await response.json();
+                }
+                // Don't retry on client errors (e.g., 400 Bad Request)
+                if (response.status >= 400 && response.status < 500) {
+                    console.error("API Client Error:", response.status, await response.text());
+                    return null; 
+                }
+                // Retry on server errors (e.g., 5xx, 429)
+                console.warn(`API Server Error/Rate Limit. Retrying... (${i + 1}/${retries})`);
+            } catch (error) {
+                console.warn(`Fetch Error. Retrying... (${i + 1}/${retries})`, error);
+            }
+            await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+        }
+        console.error("API call failed after all retries.");
+        return null; // Failed after retries
+    }
+
+
+    // --- Gemini Text API Function ---
+    async function callGeminiTextAPI(prompt, systemPrompt) {
+        const apiKey = ""; // API 키
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+        };
+
+        const result = await fetchWithBackoff(apiUrl, payload);
+
+        if (result && result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+            return result.candidates[0].content.parts[0].text;
+        } else {
+            console.error("Unexpected API (Text) response structure:", result);
+            return "죄송합니다, AI로부터 텍스트 응답을 가져오는 데 실패했습니다.";
+        }
+    }
+
+    // --- Gemini Chat (JSON) API Function ---
+    async function callGeminiChatAPI(prompt, systemPrompt) {
+        const apiKey = ""; // API 키
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+            generationConfig: {
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: "OBJECT",
+                    properties: {
+                        "type": { "type": "STRING", "description": "응답 유형. 'chat' 또는 'schedule' 중 하나." },
+                        "date": { "type": "STRING", "description": "날짜 (YYYY-MM-DD 형식). type이 'schedule'일 때만 사용.", "nullable": true },
+                        "title": { "type": "STRING", "description": "일정 제목. type이 'schedule'일 때만 사용.", "nullable": true },
+                        "responseText": { "type": "STRING", "description": "사용자에게 보여줄 챗봇의 실제 답변." }
+                    },
+                    required: ["type", "responseText"]
+                }
+            }
+        };
+
+        const result = await fetchWithBackoff(apiUrl, payload);
+
+        if (result && result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+            // The response for JSON is a text string that needs to be parsed
+            return result.candidates[0].content.parts[0].text;
+        } else {
+            console.error("Unexpected API (JSON) response structure:", result);
+            return JSON.stringify({ type: "chat", responseText: "죄송합니다, AI로부터 JSON 응답을 가져오는 데 실패했습니다." });
+        }
+    }
+
+
+    // --- Update Upcoming Appointments ---
+    function updateUpcomingAppointments() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+        
+        const upcoming = [];
+        for (const dateKey in memories) {
+            const memoryDate = new Date(dateKey + "T00:00:00"); 
+            if (memoryDate > today) {
+                const diffTime = Math.abs(memoryDate - today);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                upcoming.push({
+                    dateKey: dateKey,
+                    daysLeft: diffDays,
+                    title: memories[dateKey].title || '새로운 일정',
+                    sendEmail: memories[dateKey].sendEmail
+                });
+            }
+        }
+        
+        upcoming.sort((a, b) => a.daysLeft - b.daysLeft); 
+
+        if (upcoming.length > 0) {
+            upcomingPlaceholder.classList.add('hidden');
+            upcomingList.innerHTML = '';
+            upcoming.forEach(item => {
+                const itemEl = document.createElement('p');
+                itemEl.innerHTML = `<i class="fas fa-bell text-amber-600 mr-2"></i><span class="font-semibold text-amber-800">${item.daysLeft}일 후:</span> ${item.title}`;
+                upcomingList.appendChild(itemEl);
+
+                if (item.daysLeft === 7 && item.sendEmail && !memories[item.dateKey].notified) {
+                    showToastNotification(`'${item.title}' 약속이 1주일 남았습니다! (이메일 알림 시뮬레이션)`);
+                    memories[item.dateKey].notified = true; 
+                }
+            });
+        } else {
+            upcomingPlaceholder.classList.remove('hidden');
+            upcomingList.innerHTML = '';
+        }
+    }
+
+    // --- Calendar Logic ---
+    function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        calendarMonthYear.textContent = `${year}년 ${month + 1}월`;
+        calendarDays.innerHTML = '';
+        selectedDayEl = null;
+        
+        memoryPlaceholderContainer.classList.remove('hidden');
+        memoryTitle.classList.add('hidden');
+        aiHighlightGenerator.classList.add('hidden');
+        addMemoryForm.classList.add('hidden');
+        
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstDayOfMonth; i++) calendarDays.innerHTML += '<div class="calendar-day empty"></div>';
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'calendar-day p-2 cursor-pointer rounded-full flex items-center justify-center relative aspect-square';
+            dayEl.textContent = day;
+            const today = new Date();
+            if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) dayEl.classList.add('today');
+
+            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            
+            if (memories[dateKey]) { 
+                dayEl.innerHTML += '<i class="fas fa-pen-nib memory-icon text-[8px] absolute bottom-1 right-1"></i>';
+                dayEl.onclick = () => showMemory(dateKey, memories[dateKey], dayEl);
+             } else {
+                 dayEl.onclick = () => showAddMemoryForm(year, month, day, dayEl);
+             }
+            calendarDays.appendChild(dayEl);
+        }
+        
+        updateUpcomingAppointments(); 
+    }
+
+    function updateSelection(element) {
+        if(selectedDayEl) selectedDayEl.classList.remove('selected');
+        element.classList.add('selected');
+        selectedDayEl = element;
+    }
+
+    function showMemory(dateKey, memoryData, element) {
+        updateSelection(element);
+        currentSelectedDate = dateKey; 
+        memoryPlaceholderContainer.classList.add('hidden');
+        addMemoryForm.classList.add('hidden');
+        aiHighlightGenerator.classList.remove('hidden');
+        
+        memoryTitle.textContent = memoryData.title;
+        memoryTitle.classList.remove('hidden');
+        
+        highlightKeywords.value = memoryData.keywords || ''; 
+        highlightResult.classList.add('hidden');
+        highlightResult.innerHTML = '';
+    }
+
+    function showAddMemoryForm(year, month, day, element) {
+        updateSelection(element);
+        currentSelectedDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        
+        memoryPlaceholderContainer.classList.add('hidden');
+        aiHighlightGenerator.classList.add('hidden');
+        addMemoryForm.classList.remove('hidden');
+        
+        memoryTitle.textContent = `${year}년 ${month + 1}월 ${day}일의 새로운 기록`;
+        memoryTitle.classList.remove('hidden');
+
+        if (isEmailNotificationEnabled) {
+            emailNotificationCheckboxContainer.classList.remove('hidden');
+        } else {
+            emailNotificationCheckboxContainer.classList.add('hidden');
+        }
+
+        document.getElementById('add-memory-headline').value = '';
+        document.getElementById('add-memory-location').value = '';
+        document.getElementById('add-memory-memo').value = '';
+        emailNotificationCheckbox.checked = false; 
+    }
+
+    // --- Generic Save Memory Function ---
+    function saveMemory(dateKey, memoryData, isFromChatbot = false) {
+        memories[dateKey] = memoryData; 
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const memoryDate = new Date(dateKey + "T00:00:00");
+
+        if (memoryData.sendEmail) {
+            if (memoryDate > today) {
+                showToastNotification(`'${memoryData.title}' 약속 생성 이메일이 전송되었습니다. (시뮬레이션)`);
+            } else if (memoryDate.getTime() === today.getTime()) {
+                showToastNotification(`'${memoryData.title}' 오늘 일정이 저장되었습니다. (이메일 알림 시뮬레이션)`);
+            }
+        }
+        
+        renderCalendar(); 
+        
+        const year = parseInt(dateKey.split('-')[0]);
+        const month = parseInt(dateKey.split('-')[1]) - 1;
+        
+        if (year === currentDate.getFullYear() && month === currentDate.getMonth()) {
+            const day = parseInt(dateKey.split('-')[2]);
+            const dayElements = calendarDays.querySelectorAll('.calendar-day:not(.empty)');
+            const targetDayEl = Array.from(dayElements).find(el => parseInt(el.textContent) === day);
+            if(targetDayEl) { 
+                targetDayEl.classList.add('selected'); 
+                selectedDayEl = targetDayEl;
+                if (!isFromChatbot) {
+                    showMemory(dateKey, memoryData, targetDayEl);
+                }
+            }
+        }
+    }
+
+    saveMemoryBtn.addEventListener('click', () => {
+        const headline = document.getElementById('add-memory-headline').value;
+        const location = document.getElementById('add-memory-location').value;
+        const memo = document.getElementById('add-memory-memo').value;
+        const sendEmail = isEmailNotificationEnabled && emailNotificationCheckbox.checked;
+
+        if (!headline && !memo) { alert('제목이나 메모 중 하나는 입력해주세요.'); return; }
+
+        const newMemory = {
+            title: headline || '새로운 기록',
+            story: memo,
+            location: location,
+            keywords: `${headline}, ${location}, ${memo.substring(0, 20)}`,
+            sendEmail: sendEmail,
+            notified: false 
+        };
+        
+        saveMemory(currentSelectedDate, newMemory, false);
+    });
+
+    deleteMemoryBtn.addEventListener('click', () => {
+        if (currentSelectedDate && memories[currentSelectedDate]) {
+            delete memories[currentSelectedDate];
+            currentSelectedDate = null;
+            renderCalendar(); 
+        } else {
+            alert("삭제할 기록이 선택되지 않았습니다.");
+        }
+    });
+    
+    prevMonthBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+    nextMonthBtn.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+
+    // --- Date Picker Logic ---
+    calendarMonthYear.addEventListener('click', () => {
+        if (datePickerPanel.classList.contains('hidden')) {
+            populateMonthPicker();
+            monthPicker.classList.remove('hidden');
+            yearPicker.classList.add('hidden');
+            isYearPickerVisible = false;
+            datePickerPanel.classList.remove('hidden');
+        } else if (!isYearPickerVisible) {
+            populateYearPicker();
+            monthPicker.classList.add('hidden');
+            yearPicker.classList.remove('hidden');
+            isYearPickerVisible = true;
+             const currentYear = currentDate.getFullYear();
+             const currentYearEl = yearPicker.querySelector(`[data-year="${currentYear}"]`);
+             if (currentYearEl) {
+                 currentYearEl.scrollIntoView({ block: 'center' });
+             }
+        } else {
+             datePickerPanel.classList.add('hidden');
+        }
+    });
+
+    function populateMonthPicker() {
+        monthPicker.innerHTML = '';
+        const currentMonth = currentDate.getMonth();
+        for (let i = 0; i < 12; i++) {
+            const monthEl = document.createElement('button');
+            monthEl.className = `picker-item p-2 rounded ${i === currentMonth ? 'selected' : ''}`;
+            monthEl.textContent = `${i + 1}월`;
+            monthEl.onclick = () => {
+                currentDate.setMonth(i);
+                renderCalendar();
+                datePickerPanel.classList.add('hidden');
+            };
+            monthPicker.appendChild(monthEl);
+        }
+    }
+
+    function populateYearPicker() {
+        yearPicker.innerHTML = '';
+        const currentYear = currentDate.getFullYear();
+        const startYear = new Date().getFullYear(); 
+        const endYear = 2050;
+        for (let year = startYear; year <= endYear; year++) {
+            const yearEl = document.createElement('button');
+            yearEl.className = `picker-item p-2 rounded ${year === currentYear ? 'selected' : ''}`;
+            yearEl.textContent = year;
+            yearEl.dataset.year = year;
+            yearEl.onclick = () => {
+                currentDate.setFullYear(year);
+                populateMonthPicker();
+                monthPicker.classList.remove('hidden');
+                yearPicker.classList.add('hidden');
+                isYearPickerVisible = false;
+                 calendarMonthYear.textContent = `${year}년 ${currentDate.getMonth() + 1}월`;
+            };
+            yearPicker.appendChild(yearEl);
+        }
+    }
+     document.addEventListener('click', (event) => {
+        const calendarContainer = document.getElementById('calendar-container');
+        if (calendarContainer && !calendarContainer.contains(event.target) && !datePickerPanel.classList.contains('hidden')) {
+             datePickerPanel.classList.add('hidden');
+        }
+    });
+
+
+    // --- AI Highlight Generator Logic ---
+    generateHighlightBtn.addEventListener('click', async () => {
+        const keywords = highlightKeywords.value;
+        if (!keywords.trim()) { alert("키워드를 입력해주세요."); return; }
+        
+        generateHighlightBtn.disabled = true;
+        generateHighlightBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>AI가 생성 중...';
+        highlightResult.classList.add('hidden');
+
+        const systemPrompt = "당신은 감성적인 카피라이터입니다. 사용자가 제공하는 몇 가지 키워드를 바탕으로, 그날의 추억을 요약하는 멋진 '한 줄 하이라이트' 문구와 'SNS 캡션'을 각각 1개씩 한국어로 생성해주세요. '하이라이트:'와 'SNS:'라는 머리말을 붙여 구분해주세요.";
+        const generatedText = await callGeminiTextAPI(keywords, systemPrompt);
+
+        highlightResult.innerHTML = ''; 
+        if(generatedText.includes("죄송합니다")) {
+            highlightResult.innerHTML = `<p class="text-red-500">${generatedText}</p>`;
+        } else {
+            const parts = generatedText.split('\n');
+            parts.forEach(part => {
+                if (part.startsWith('하이라이트:')) {
+                    const highlightHtml = `
+                        <div class="p-3 bg-amber-50 rounded-lg">
+                            <h4 class="font-bold text-sm text-amber-700">✨ 한 줄 하이라이트</h4>
+                            <p class="text-gray-700 mt-1">${part.replace('하이라이트:', '').trim()}</p>
+                        </div>`;
+                    highlightResult.innerHTML += highlightHtml;
+                } else if (part.startsWith('SNS:')) {
+                     const snsHtml = `
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <h4 class="font-bold text-sm text-blue-700"><i class="fab fa-instagram"></i> SNS 캡션</h4>
+                            <p class="text-gray-700 mt-1">${part.replace('SNS:', '').trim()}</p>
+                        </div>`;
+                    highlightResult.innerHTML += snsHtml;
+                }
+            });
+        }
+
+        highlightResult.classList.remove('hidden');
+        generateHighlightBtn.disabled = false;
+        generateHighlightBtn.innerHTML = '✨ AI 하이라이트 생성하기';
+    });
+
+    // --- Chatbot Logic ---
+    chatbotForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userInput = chatbotInput.value.trim();
+        if (!userInput) return;
+        addChatMessage(userInput, 'user');
+        chatbotInput.value = '';
+        const typingIndicator = addTypingIndicator();
+        
+        const currentYear = new Date().getFullYear();
+        const systemPrompt = `당신은 '우리들의 다이어리' 챗봇이며, 사용자의 감성적인 친구이자 조언자입니다. 따뜻하고 친근한 말투로 한국어로 대답해주세요.
+날짜 계산 ('1000일', '며칠 됐지' 등) 요청은 'chat' 유형으로 친절하게 답변해주세요.
+'${currentYear+1}년 11월 20일에 병원 예약 일정 추가해줘'처럼 날짜와 일정이 명확하면, JSON의 'type'을 'schedule'로, 'date'를 'YYYY-MM-DD' 형식으로, 'title'을 일정 제목으로, 'responseText'를 확인 메시지로 채워서 응답해주세요.
+그 외 모든 일반 대화는 'type'을 'chat'으로, 'responseText'에 답변을 담아 응답해주세요.`;
+        
+        const botResponseText = await callGeminiChatAPI(userInput, systemPrompt);
+        
+        if (typingIndicator.parentNode) { 
+           chatbotLog.removeChild(typingIndicator);
+        }
+        
+        try {
+            const resObj = JSON.parse(botResponseText);
+            if (resObj.type === 'schedule') {
+                addChatMessage(resObj.responseText, 'bot');
+                
+                const newMemory = {
+                    title: resObj.title,
+                    story: "챗봇을 통해 추가된 일정입니다.",
+                    location: "",
+                    keywords: resObj.title,
+                    sendEmail: isEmailNotificationEnabled, // Check global setting
+                    notified: false 
+                };
+                saveMemory(resObj.date, newMemory, true); // true indicates from chatbot
+            } else {
+                 addChatMessage(resObj.responseText, 'bot');
+            }
+        } catch (error) {
+            // Not a JSON response, just display text (or handle error)
+            console.error("Failed to parse JSON response from chatbot:", error);
+            addChatMessage(botResponseText, 'bot'); // Show raw text if parse fails
+        }
+    });
+
+    function addChatMessage(message, sender) {
+        const bubble = document.createElement('div');
+        bubble.className = sender === 'user' ? 'chat-bubble-user p-3 rounded-lg self-end max-w-xs break-words text-right' : 'chat-bubble-bot p-3 rounded-lg self-start max-w-xs break-words';
+        bubble.innerHTML = message.replace(/\n/g, '<br>'); // Render newlines
+        chatbotLog.appendChild(bubble);
+        chatbotLog.scrollTop = chatbotLog.scrollHeight;
+    }
+    
+    function addTypingIndicator() {
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble-bot p-3 rounded-lg self-start max-w-min';
+        bubble.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
+        chatbotLog.appendChild(bubble);
+        chatbotLog.scrollTop = chatbotLog.scrollHeight;
+        return bubble;
+    }
+
+    // --- Initial Render ---
+    renderCalendar();
+});
+</script>
+</body>
+</html>

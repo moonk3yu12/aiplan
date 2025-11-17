@@ -1,0 +1,224 @@
+@import 'react-calendar/dist/Calendar.css';
+/* --- Global Styles --- */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8fafc; /* CHANGED: 쿨톤 배경 (slate-50) */
+    color: #4a4a4a;
+    transition: background-color 0.5s ease;
+}
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Landing Page Styles --- */
+.hero-section { background: linear-gradient(to bottom, #f8fafc, #f0f9ff); } /* CHANGED: 하늘색 그라데이션 */
+.btn-primary { background-color: #c026d3; color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(192, 38, 211, 0.2); } /* CHANGED: 마젠타 */
+.btn-primary:hover { background-color: #a21caf; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(192, 38, 211, 0.3); } /* CHANGED: 마젠타 (진) */
+.btn-primary:disabled { background-color: #e0e7ff; cursor: not-allowed; box-shadow: none; transform: none; } /* CHANGED: 연한 인디고 */
+.btn-secondary { background-color: #e0f2fe; color: #0369a1; transition: all 0.3s ease; } /* CHANGED: 하늘색 */
+.btn-secondary:hover { background-color: #bae6fd; } /* CHANGED: 하늘색 (진) */
+.btn-danger { background-color: #fee2e2; color: #dc2626; transition: all 0.3s ease; }
+.btn-danger:hover { background-color: #fecaca; color: #b91c1c; }
+
+.btn-gemini {
+    background: linear-gradient(90deg, #a21caf, #38bdf8); /* CHANGED: 마젠타/하늘색 그라데이션 */
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(162, 44, 175, 0.3);
+}
+.btn-gemini:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(162, 44, 175, 0.4);
+}
+    .btn-gemini:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+.section-title { font-size: 2.5rem; font-weight: 900; color: #a21caf; } /* CHANGED: 마젠타 (진) */
+.feature-card { background-color: white; border-radius: 16px; border: 1px solid #e0f2fe; transition: all 0.3s ease; } /* CHANGED: 하늘색 테두리 */
+.feature-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 1s, transform 1s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* --- Login/Signup/MyPage Page Styles --- */
+.auth-card { background-color: white; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+.input-field { background-color: #f1f5f9; border: 1px solid #e0f2fe; } /* CHANGED: 쿨톤 (slate-100) */
+.input-field:focus { border-color: #c026d3; box-shadow: 0 0 0 2px rgba(192, 38, 211, 0.2); outline: none; } /* CHANGED: 마젠타 */
+.input-field:read-only { background-color: #e5e7eb; color: #6b7280; cursor: not-allowed; }
+.btn-social { transition: all 0.3s ease; }
+.btn-social:hover { background-color: #f1f5f9; transform: translateY(-2px); } /* CHANGED: 쿨톤 (slate-100) */
+
+/* --- App Page Styles --- */
+.app-container { height: 100vh; max-height: 900px; }
+.main-panel { background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); } /* CHANGED: 하늘색 그라데이션 */
+.calendar-day { transition: all 0.2s ease-in-out; }
+.calendar-day:hover:not(.empty) { background-color: #e0f2fe; transform: scale(1.1); } /* CHANGED: 하늘색 */
+.calendar-day.today { background-color: #c026d3; color: white; } /* CHANGED: 마젠타 */
+.calendar-day.selected { background-color: #a21caf; color: white; transform: scale(1.1); } /* CHANGED: 마젠타 (진) */
+.memory-icon { color: #c026d3; } /* CHANGED: 마젠타 */
+.chat-bubble-bot { background-color: #e0f2fe; color: #0369a1; } /* CHANGED: 하늘색 */
+.chat-bubble-user { background-color: #c026d3; color: white; } /* CHANGED: 마젠타 */
+.typing-indicator span {
+    height: 8px; width: 8px; background-color: #c026d3; border-radius: 50%; display: inline-block;
+    animation: bounce 1.3s infinite;
+} /* CHANGED: 마젠타 */
+.typing-indicator span:nth-child(2) { animation-delay: 0.15s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+#date-picker-panel {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-height: 300px;
+    overflow-y: auto;
+}
+.picker-item {
+    transition: background-color 0.2s;
+}
+.picker-item:hover {
+        background-color: #e0f2fe; /* CHANGED: 하늘색 */
+}
+.picker-item.selected {
+    background-color: #c026d3; /* CHANGED: 마젠타 */
+    color: white;
+    font-weight: bold;
+}
+#upcoming-appointments {
+    max-height: 150px;
+    overflow-y: auto;
+}
+/* Toast Notification */
+#toast-notification {
+    transition: opacity 0.3s, transform 0.3s;
+}
+.toast-show {
+    opacity: 1;
+    transform: translateX(0);
+}
+/* Toggle Switch */
+.toggle-label {
+    transition: background-color 0.2s;
+}
+.toggle-label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background: white;
+    width: 1.25rem; /* 20px */
+    height: 1.25rem; /* 20px */
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+input:checked + .toggle-label {
+    background-color: #c026d3; /* CHANGED: 마젠타 */
+}
+input:checked + .toggle-label:after {
+    transform: translateX(1rem); /* 16px */
+}
+/* --- react-calendar Custom Styles --- */
+.react-calendar {
+  width: 100%;
+  border: 1px solid #e0f2fe; /* CHANGED: 하늘색 */
+  background: white;
+  border-radius: 0.75rem; /* 12px */
+  font-family: 'Noto Sans KR', sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  padding: 0.5rem;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 0.5em;
+}
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #c026d3; /* CHANGED: 마젠타 */
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+}
+.react-calendar__navigation button:hover {
+  background-color: #e0f2fe; /* CHANGED: 하늘색 */
+}
+.react-calendar__navigation__label {
+  flex-grow: 1 !important;
+  font-size: 1rem !important; 
+  font-weight: 700 !important;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+  text-align: center;
+  font-weight: 600;
+  color: #a21caf; /* CHANGED: 마젠타 (진) */
+  font-size: 0.75rem;
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+.react-calendar__tile {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+  height: 52px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+  position: relative; 
+}
+
+.react-calendar__tile:hover {
+  background-color: #e0f2fe; /* CHANGED: 하늘색 */
+}
+
+.react-calendar__tile--now {
+  background-color: #e0f2fe; /* CHANGED: 하늘색 */
+  font-weight: bold;
+}
+.react-calendar__tile--now:hover {
+  background-color: #bae6fd; /* CHANGED: 하늘색 (진) */
+}
+
+.react-calendar__tile--active {
+  background-color: #c026d3 !important; /* CHANGED: 마젠타 */
+  color: white !important;
+  font-weight: bold;
+}
+.react-calendar__tile--active:hover {
+  background-color: #a21caf !important; /* CHANGED: 마젠타 (진) */
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #cbd5e1; /* CHANGED: 쿨톤 (slate-300) */
+  cursor: default;
+}
+.react-calendar__month-view__days__day--neighboringMonth:hover {
+  background: none;
+}
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  font-size: 0.8rem; /* 폰트 크기를 약간 줄임 */
+  height: auto; /* 고정 높이 제거 */
+  padding: 1rem 0.25rem; /* 상하 패딩을 줘서 공간 확보 */
+  justify-content: center; /* 텍스트를 중앙 정렬 */
+  
+  /* (선택) 글자가 길 경우 줄바꿈 대신 단어를 유지 */
+  white-space: nowrap; 
+}
