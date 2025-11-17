@@ -20,12 +20,16 @@ if (EMAIL_USER && EMAIL_PASS) {
 }
 
 // --- 날짜 포맷팅 헬퍼 함수 ---
-// (new Date()를 'YYYY-MM-DD' 형식으로 변경)
-function getFormattedDate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+// (★수정★) 시간대를 지정하여 'YYYY-MM-DD' 형식으로 변경하는 함수
+function getFormattedDate(date, timeZone) {
+  // 'en-CA' 로케일은 'YYYY-MM-DD' 형식을 기본으로 사용하므로 편리합니다.
+  const options = {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  };
+  return new Intl.DateTimeFormat('en-CA', options).format(date);
 }
 
 // --- (★핵심★) 예약 알림 이메일 전송 작업 ---
@@ -35,16 +39,18 @@ const sendReminderEmails = async () => {
     return;
   }
 
-  console.log('[Scheduler] 자정 예약 작업 실행: 알림 이메일 발송을 시작합니다...');
+  console.log('[Scheduler] 오전 9시 예약 작업 실행: 알림 이메일 발송을 시작합니다...');
 
-  // 1. 오늘 날짜 (D-Day)
-  const today = new Date();
-  const todayDateKey = getFormattedDate(today);
+  // --- (★수정★) 한국 시간대 기준으로 날짜 키 생성 ---
+  const now = new Date();
+  // 1. 오늘 날짜 (D-Day) - 한국 시간 기준
+  const todayDateKey = getFormattedDate(now, 'Asia/Seoul');
 
-  // 2. 7일 후 날짜 (D-7)
-  const sevenDaysFromNow = new Date();
-  sevenDaysFromNow.setDate(today.getDate() + 7);
-  const sevenDayDateKey = getFormattedDate(sevenDaysFromNow);
+  // 2. 7일 후 날짜 (D-7) - 한국 시간 기준
+  const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
+  const sevenDaysFromNow = new Date(now.getTime() + sevenDaysInMillis);
+  const sevenDayDateKey = getFormattedDate(sevenDaysFromNow, 'Asia/Seoul');
+
 
   try {
     // 3. DB에서 오늘 또는 7일 뒤가 D-Day이고, 알림 설정(sendEmail=1)이 켜져 있으며,
@@ -86,7 +92,7 @@ const sendReminderEmails = async () => {
       return;
     }
 
-    console.log(`[Scheduler] 총 ${reminders.length}건의 예약 알림을 찾았습니다. 전송 시작...`);
+    console.log(`[Scheduler] 총 ${reminders.length + countdownReminders.length}건의 예약 알림을 찾았습니다. 전송 시작...`);
 
     // 4. 찾은 일정들을 하나씩 돌면서 이메일 전송
     for (const reminder of reminders) {
@@ -120,6 +126,34 @@ const sendReminderEmails = async () => {
         html: `<div style="font-family: 'Noto Sans KR', sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 12px;">${htmlContent}</div>`
       });
       console.log(`[Scheduler] 이메일 전송 성공 (To: ${reminder.email}, Subject: ${subject})`);
+    }
+
+    // --- (★버그 수정★) 카운트다운 알림 (D-6 ~ D-1) 이메일 전송 로직 추가 ---
+    for (const reminder of countdownReminders) {
+      // --- (★수정★) 시간대 문제 해결을 위한 날짜 차이 계산 ---
+      const todayInSeoul = new Date(todayDateKey); // 'YYYY-MM-DD' 문자열로 Date 객체 생성 (UTC 자정 기준)
+      const eventDate = new Date(reminder.dateKey); // 동일하게 UTC 자정 기준으로 생성
+      const diffTime = eventDate.getTime() - todayInSeoul.getTime();
+      // getTime()은 UTC 기준 밀리초이므로, 시간대 상관없이 정확한 날짜 차이를 계산할 수 있음
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+
+      if (diffDays > 0) {
+        const subject = `[D-${diffDays}] '${reminder.title}' 일정이 ${diffDays}일 남았습니다.`;
+        const htmlContent = `<p>안녕하세요, ${reminder.nickname}님!</p>
+                       <p><strong>${diffDays}일</strong> 뒤(${reminder.dateKey})에 <strong>${reminder.title}</strong> 일정이 있습니다. 🗓️</p>`;
+
+        await transporter.sendMail({
+          from: `"우리들의 다이어리" <${EMAIL_USER}>`,
+          to: reminder.email,
+          subject: subject,
+          html: `<div style="font-family: 'Noto Sans KR', sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 12px;">${htmlContent}</div>`
+        });
+        console.log(`[Scheduler] 카운트다운 이메일 전송 성공 (To: ${reminder.email}, Subject: ${subject})`);
+
+        // (DB 업데이트) "오늘 카운트다운 알림 보냈음"으로 표시
+        await pool.query("UPDATE memos SET last_notified_countdown_date = ? WHERE id = ?", [todayDateKey, reminder.id]);
+      }
     }
 
   } catch (error) {
@@ -254,14 +288,14 @@ const sendDeletionNotification = async (memo, user) => {
 module.exports = {
   sendImmediateNotification, // 즉시 알림 함수 내보내기
   sendDeletionNotification, // (★추가★) 삭제 알림 함수 내보내기
-  // 매일 0시 0분 (자정)에 sendReminderEmails 함수를 실행
+  // 매일 오전 9시에 sendReminderEmails 함수를 실행
   startScheduledJobs: () => {
     // (테스트용: '*/1 * * * *' -> 매 1분마다 실행)
-    // (실제용: '0 0 * * *' -> 매일 0시 0분(자정)에 실행)
-    cron.schedule('0 0 * * *', sendReminderEmails, {
+    // (실제용: '0 9 * * *' -> 매일 오전 9시에 실행)
+    cron.schedule('0 9 * * *', sendReminderEmails, {
       timezone: "Asia/Seoul"
     });
     
-    console.log('✅ 예약 알림 스케줄러(매일 자정)가 활성화되었습니다.');
+    console.log('✅ 예약 알림 스케줄러(매일 오전 9시)가 활성화되었습니다.');
   }
 };
