@@ -4,7 +4,128 @@ import Calendar from 'react-calendar';
 import axios from 'axios';
 import { HIGHLIGHT_SYSTEM_PROMPT, getChatbotSystemPrompt } from '../prompts';
 import { generateHighlightAPI, postToChatbotAPI } from '../api/ai';
+import { getWeatherRecommendation } from '../services/weatherService';
 import 'react-calendar/dist/Calendar.css';
+
+// Helper function to extract dates from user text and convert to Date objects
+const extractDatesAndConvertToDateObject = (text) => {
+  const dates = [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Handle relative dates like "오늘", "내일", "모레"
+  if (text.includes('내일')) {
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    dates.push({ text: '내일', date: tomorrow });
+  }
+  if (text.includes('모레')) {
+    const dayAfterTomorrow = new Date(today);
+    dayAfterTomorrow.setDate(today.getDate() + 2);
+    dates.push({ text: '모레', date: dayAfterTomorrow });
+  }
+  if (text.includes('오늘')) {
+    dates.push({ text: '오늘', date: today });
+  }
+
+  // Handle specific day like "20일"
+  const dayRegex = /(\d{1,2})일/g;
+  const hasDay = dayRegex.test(text);
+  dayRegex.lastIndex = 0; // Reset regex state
+
+  // 월별 조회 처리 ("N월")
+  const monthRegex = /(\d{1,2})월/g;
+  if (!hasDay && monthRegex.test(text)) {
+      monthRegex.lastIndex = 0; // Reset regex state
+      let match;
+      while ((match = monthRegex.exec(text)) !== null) {
+          const month = parseInt(match[1], 10);
+          const year = today.getFullYear(); // Assume current year
+          // YYYY-MM 형식으로 월별 쿼리를 식별
+          dates.push({ text: `${month}월`, date: `${year}-${String(month).padStart(2, '0')}` });
+      }
+  } else {
+      // 기존 일별 처리
+      let match;
+      while ((match = dayRegex.exec(text)) !== null) {
+          const day = parseInt(match[1], 10);
+          const targetDate = new Date(today);
+          targetDate.setDate(day);
+
+          if (targetDate < today) {
+              targetDate.setMonth(today.getMonth() + 1);
+          }
+          
+          dates.push({ text: `${day}일`, date: targetDate });
+      }
+  }
+  
+  // Handle "주말" (weekend)
+  if (text.includes('주말') || text.includes('이번 주말')) {
+    const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
+    const saturday = new Date(today);
+    saturday.setDate(today.getDate() + (6 - dayOfWeek));
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() + (7 - dayOfWeek));
+    
+    dates.push({ text: '이번 주 토요일', date: saturday });
+    dates.push({ text: '이번 주 일요일', date: sunday });
+  }
+
+  // Remove duplicates
+  const uniqueDates = new Map();
+  dates.forEach(d => {
+    const key = d.date instanceof Date ? d.date.toDateString() : d.date;
+    if (!uniqueDates.has(key)) {
+      uniqueDates.set(key, d);
+    }
+  });
+  return Array.from(uniqueDates.values());
+};
+
+// Helper function to fetch weather and create a context string for the AI
+const getWeatherContextForDates = async (dates) => {
+  if (!dates || dates.length === 0) {
+    return '';
+  }
+
+  const weatherPromises = dates.map(async ({ text, date }) => {
+    try {
+      // 월별 조회(YYYY-MM)와 일별 조회(Date object) 분기
+      if (typeof date === 'string' && /^\d{4}-\d{2}$/.test(date)) {
+        const weatherSummary = await getWeatherRecommendation(date, 37.5665, 126.9780);
+        // getMonthlyWeather가 반환하는 요약 문자열을 그대로 사용
+        return weatherSummary; 
+      } else if (date instanceof Date) {
+        const weather = await getWeatherRecommendation(date, 37.5665, 126.9780);
+        if (!weather || weather.temp === null) {
+          return `${text} 날씨 정보 조회 실패`;
+        }
+        
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+        const status = weather.rain !== '강수 없음' ? weather.rain : weather.sky;
+
+        return `${formattedDate} 날씨 데이터 -> 기온: ${weather.temp}도, 상태: ${status}, 조언: ${weather.comment}`;
+      }
+      return null; // 유효하지 않은 형식
+    } catch (error) {
+      console.error(`Error fetching weather for ${text}:`, error);
+      return `${text} 날씨 정보 조회 실패`;
+    }
+  });
+
+  const weatherResults = await Promise.all(weatherPromises.filter(p => p !== null));
+  // 월별 조회 결과는 이미 (시스템 정보: ...) 형식이므로 추가 감싸기 제거
+  const contextString = weatherResults.join('; ');
+  if (contextString.startsWith('(시스템 정보:')) {
+      return contextString;
+  }
+  return `(시스템 정보: ${contextString}.) `;
+};
 
 function AppPage({ user, apiClient, onLogout, memories, setMemories, isEmailEnabled }) {
   const navigate = useNavigate();
@@ -92,11 +213,16 @@ function AppPage({ user, apiClient, onLogout, memories, setMemories, isEmailEnab
     setChatbotInput('');
     setIsChatbotLoading(true);
 
+    // Pre-process for weather information based on dates in user input
+    const dates = extractDatesAndConvertToDateObject(userInput);
+    const weatherContext = dates.length > 0 ? await getWeatherContextForDates(dates) : '';
+    const finalUserInput = weatherContext + userInput;
+
     const memoriesJson = memories ? JSON.stringify(memories, null, 2) : null;
     const systemPrompt = getChatbotSystemPrompt(memoriesJson);
 
     try {
-      const response = await postToChatbotAPI(userInput, systemPrompt);
+      const response = await postToChatbotAPI(finalUserInput, systemPrompt);
       
       const resObj = JSON.parse(response.text);
       setChatbotLog(prevLog => [...prevLog, { sender: 'bot', message: resObj.responseText }]);
@@ -147,6 +273,17 @@ function AppPage({ user, apiClient, onLogout, memories, setMemories, isEmailEnab
       setHighlightResult("하이라이트 생성 중 오류가 발생했습니다.");
     } finally {
       setIsHighlightLoading(false);
+    }
+  };
+
+  const handleWeatherCheck = async () => {
+    try {
+      const result = await getWeatherRecommendation(selectedDate, 37.5665, 126.9780);
+      console.log('Weather Recommendation:', result);
+      alert(`날씨 점수: ${result.score}\n코멘트: ${result.comment}`);
+    } catch (error) {
+      console.error('Failed to get weather recommendation:', error);
+      alert('날씨 정보를 가져오는데 실패했습니다.');
     }
   };
 
@@ -330,6 +467,8 @@ function AppPage({ user, apiClient, onLogout, memories, setMemories, isEmailEnab
                       )}
                     </button>
 
+                    <button onClick={handleWeatherCheck} className="btn-secondary w-full py-2 mt-2 rounded-lg font-bold">날씨 확인하기</button>
+
                     <button id="delete-memory-btn" onClick={handleDeleteMemory} className="btn-danger w-full py-2 mt-4 rounded-lg font-semibold text-sm">
                       <i className="fas fa-trash-alt mr-2"></i>이 기록 삭제하기
                     </button>
@@ -405,6 +544,7 @@ function AppPage({ user, apiClient, onLogout, memories, setMemories, isEmailEnab
                     )}
                     
                     <button id="save-memory-btn" onClick={handleFormSave} className="btn-primary w-full py-2 rounded-lg font-bold">저장하기</button>
+                    <button onClick={handleWeatherCheck} className="btn-secondary w-full py-2 mt-2 rounded-lg font-bold">날씨 확인하기</button>
                   </div>
                 </div>
               )}
