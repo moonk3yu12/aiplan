@@ -396,7 +396,10 @@
                     <i class="fa-solid fa-file-powerpoint"></i> 발표자료 다운로드
                 </a>
                 
-                <a href="https://github.com/moonk3yu12/aiplan.git" target="_blank" class="btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
+                <!-- [수정됨] 배포 링크임을 명확히 표시 -->
+                <a href="https://github.com/moonk3yu12/aiplan.git" target="_blank" class="btn-secondary">
+                    <i class="fa-brands fa-github"></i> GitHub (배포 링크)
+                </a>
             </div>
         </div>
     </section>
@@ -451,8 +454,16 @@
             
             <div class="project-card">
                 <div class="project-header">
-                    <h2>우리들의 다이어리</h2>
-                    <p>초개인화 AI 일정 관리 챗봇 서비스</p>
+                    <!-- [수정됨] 프로젝트 제목 옆에 배포 상태 뱃지 추가 -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <h2>우리들의 다이어리</h2>
+                            <p>초개인화 AI 일정 관리 챗봇 서비스</p>
+                        </div>
+                        <span style="background: rgba(255,255,255,0.15); padding: 6px 15px; border-radius: 30px; font-size: 14px; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-brands fa-github"></i> <span>GitHub Code 배포 완료</span>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="project-body">
@@ -695,10 +706,9 @@
                 </a>
               
             </div>
-            <p class="footer-copy">© 2025 Lee MoonKyu. All rights reserved.</p>
+            <p class="footer-copy">© 2024 Lee MoonKyu. All rights reserved.</p>
         </div>
     </section>
 
 </body>
 </html>
-
