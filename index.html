@@ -571,62 +571,62 @@
                                             <span class="arch-role">Front</span>
                                             달력을 클릭하여<br>일정을 입력
                                         </div>
-                                        <div class="arch-card bg-back">
-                                            <span class="arch-role">Back</span>
-                                            입력받은 정보 DB 호출,<br>저장 후 Front 응답
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Row 2: AI Usage -->
-                                <div class="arch-row">
-                                    <div class="arch-label-box">
-                                        <i class="fa-regular fa-star" style="color: #ef4444; margin-right: 4px;"></i>
-                                        <span>AI<br>활용 예</span>
-                                    </div>
-                                    <div class="arch-steps">
-                                        <div class="arch-card bg-front">
-                                            <span class="arch-role">Front</span>
-                                            사용자 명령어를<br>챗봇에 전달
-                                        </div>
-                                        <div class="arch-card bg-back">
-                                            <span class="arch-role">Back</span>
-                                            Gen AI API 호출하여<br>응답을 전달
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Right Flow (DB) -->
-                            <div class="arch-db-section">
-                                <div class="arch-card bg-db">
-                                    <i class="fa-solid fa-database fa-2x" style="margin-bottom: 10px; opacity: 0.5;"></i><br>
-                                    <span class="arch-role">DB</span>
-                                    Back 요청에 따라<br>데이터를 제공하거나<br>저장
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. 사용자 평가 (NEW) - 기준표에 맞춘 추가 섹션 -->
+                    <!-- 5. 사용자 평가 (NEW) - 실제 피드백 반영 -->
                     <div class="eval-box">
                         <h3 style="margin-bottom: 20px; color: #15803d; text-align: center;">04. 사용자 평가 및 피드백</h3>
-                        <p style="text-align: center; margin-bottom: 20px; color: #475569;">
-                            대학교 동기 및 개발자 20명을 대상으로 진행한 로컬 테스트 결과입니다.<br>
-                            사용자들은 특히 '자연어 입력'의 편의성에 높은 점수를 주었습니다.
+                        <p style="text-align: center; margin-bottom: 30px; color: #475569;">
+                            고등학교 친구 3명을 대상으로 진행한 솔직한 피드백입니다.<br>
+                            비전공자 관점에서의 배포 경험과 기획에 대한 다양한 의견을 청취했습니다.
                         </p>
-                        <div class="eval-stats">
+                        
+                        <!-- 평점 및 인원 -->
+                        <div class="eval-stats" style="margin-bottom: 30px; border-bottom: 1px dashed #bbf7d0; padding-bottom: 20px;">
                             <div class="stat-item">
-                                <h4>4.7/5</h4>
-                                <p>전반적 만족도</p>
+                                <h4>3.0/5</h4>
+                                <p>평균 만족도 (중간)</p>
                             </div>
                             <div class="stat-item">
-                                <h4>95%</h4>
-                                <p>재사용 의향</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>20명</h4>
+                                <h4>3명</h4>
                                 <p>테스트 참여 인원</p>
+                            </div>
+                        </div>
+
+                        <!-- 개별 피드백 카드 -->
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <!-- 피드백 1 -->
+                            <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #bbf7d0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <strong style="color: #1e293b;">최*혁</strong>
+                                    <span style="font-size: 12px; color: #ef4444; background: #fee2e2; padding: 4px 8px; border-radius: 20px; font-weight: 600;">비전공자 이슈</span>
+                                </div>
+                                <p style="font-size: 15px; color: #334155; margin: 0;">
+                                    <i class="fa-solid fa-quote-left" style="color: #cbd5e1; margin-right: 5px;"></i>
+                                    배포를 받아서 실행해보려 했는데, 컴퓨터 전공자가 아니라서 환경 설정하고 실행하는 데 어려움이 있었습니다. 웹사이트처럼 바로 접속할 수 있으면 좋겠습니다.
+                                </p>
+                            </div>
+
+                            <!-- 피드백 2 -->
+                            <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #bbf7d0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <strong style="color: #1e293b;">이*민</strong>
+                                    <span style="font-size: 12px; color: #3b82f6; background: #dbeafe; padding: 4px 8px; border-radius: 20px; font-weight: 600;">사용성</span>
+                                </div>
+                                <p style="font-size: 15px; color: #334155; margin: 0;">
+                                    <i class="fa-solid fa-quote-left" style="color: #cbd5e1; margin-right: 5px;"></i>
+                                    전반적으로 그럭저럭 쓸만합니다. 채팅으로 일정을 넣는 건 편하네요.
+                                </p>
+                            </div>
+
+                            <!-- 피드백 3 -->
+                            <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #bbf7d0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <strong style="color: #1e293b;">박*형</strong>
+                                    <span style="font-size: 12px; color: #f59e0b; background: #fef3c7; padding: 4px 8px; border-radius: 20px; font-weight: 600;">기획</span>
+                                </div>
+                                <p style="font-size: 15px; color: #334155; margin: 0;">
+                                    <i class="fa-solid fa-quote-left" style="color: #cbd5e1; margin-right: 5px;"></i>
+                                    아이디어나 기획 자체는 잘한 것 같습니다. 날씨 알려주는 기능이 신선했습니다.
+                                </p>
                             </div>
                         </div>
                     </div>
