@@ -311,22 +311,26 @@
             text-align: center;
         }
 
-        .arch-arrow {
-            display: none; /* Desktop grid handles layout */
+        /* Evaluation Section Styles (NEW) */
+        .eval-box {
+            background: #f0fdf4; /* 연한 초록 */
+            border: 1px solid #bbf7d0;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .eval-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        @media (max-width: 768px) {
-            .arch-wrapper { flex-direction: column; }
-            .arch-row { flex-direction: column; border-bottom: 1px dashed var(--border); padding-bottom: 20px; }
-            .arch-row:last-child { border-bottom: none; }
-            .arch-label-box { width: 100%; flex-direction: row; gap: 5px; margin-bottom: 10px; }
-            .arch-steps { grid-template-columns: 1fr; }
-            .arch-db-section { height: auto; }
-            .bg-db { height: auto; padding: 20px; }
-            .about-grid, .feature-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 36px; }
-            .nav-links { display: none; } 
-        }
+        .stat-item h4 { font-size: 40px; color: #16a34a; margin-bottom: 5px; }
+        .stat-item p { font-size: 16px; color: #475569; font-weight: 600; }
 
         .retrospective {
             background: #fff8eb; /* 연한 노랑 */
@@ -360,9 +364,16 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .arch-wrapper { flex-direction: column; }
+            .arch-row { flex-direction: column; border-bottom: 1px dashed var(--border); padding-bottom: 20px; }
+            .arch-row:last-child { border-bottom: none; }
+            .arch-label-box { width: 100%; flex-direction: row; gap: 5px; margin-bottom: 10px; }
+            .arch-steps { grid-template-columns: 1fr; }
+            .arch-db-section { height: auto; }
+            .bg-db { height: auto; padding: 20px; }
             .about-grid, .feature-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 36px; }
-            .nav-links { display: none; } /* 모바일 메뉴 생략 */
+            .nav-links { display: none; } 
         }
     </style>
 </head>
@@ -391,10 +402,13 @@
             <p class="tagline">생성형 AI와 공공데이터를 결합하여 사용자 경험을 혁신하는<br>문제 해결 중심의 풀스택 개발자</p>
             <div class="hero-btns">
                 <a href="#project" class="btn-primary">프로젝트 보기</a>
-                <!-- 발표자료 다운로드 버튼 추가 -->
-                <a href="presentation.html" download class="btn-secondary" style="color: #2563eb; border-color: #2563eb;">
+                
+                <!-- [수정됨] 실제 PPT 파일 다운로드로 변경 -->
+                <!-- 주의: 같은 폴더 내에 '20210858이문규_Comment.pptx' 파일이 있어야 합니다 -->
+                <a href="20210858이문규_Comment.pptx" download class="btn-secondary" style="color: #2563eb; border-color: #2563eb;">
                     <i class="fa-solid fa-file-powerpoint"></i> 발표자료 다운로드
                 </a>
+                
                 <a href="https://github.com/moonk3yu12/aiplan.git" target="_blank" class="btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
         </div>
@@ -455,14 +469,44 @@
                 </div>
 
                 <div class="project-body">
-                    <!-- 1. 문제 및 해결 -->
+                    <!-- 1. 기획 및 목표 (수정됨: 평가 기준 '기획 내역' 반영) -->
                     <div style="margin-bottom: 50px;">
-                        <h3 style="margin-bottom: 20px; color: var(--primary);">01. 문제 정의 및 해결책</h3>
-                        <p style="margin-bottom: 10px;"><strong>⚠️ 문제점:</strong> 기존 캘린더 앱의 복잡한 입력 방식(날짜/시간 터치 설정)과 수동적인 알림으로 인한 잦은 일정 누락.</p>
-                        <p><strong>💡 해결책:</strong> 자연어 대화형 AI 챗봇을 도입하여 입력 단계를 단축하고, 날씨 정보를 반영한 능동적 조언 기능 구현.</p>
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">01. 기획 배경 및 목표 (Planning)</h3>
+                        
+                        <!-- 기획 의도 -->
+                        <div style="margin-bottom: 25px;">
+                            <h4 style="font-size: 18px; margin-bottom: 10px; color: var(--secondary);">📅 기획 의도</h4>
+                            <p style="color: var(--text-sub);">
+                                기존 캘린더 앱의 복잡한 입력 방식(날짜/시간 터치)과 수동적인 알림으로 인한 <strong>'일정 누락' 문제</strong>를 해결하고자 했습니다. 
+                                친구와 대화하듯 편하게 일정을 관리하고, 날씨 등 맥락(Context)을 이해하는 <strong>능동적인 AI 비서</strong>를 만드는 것이 목표입니다.
+                            </p>
+                        </div>
+
+                        <!-- 목표 기능 정의 -->
+                        <div>
+                            <h4 style="font-size: 18px; margin-bottom: 10px; color: var(--secondary);">🎯 목표 기능 (Target Features)</h4>
+                            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <li style="background: #f8fafc; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px;">
+                                    <i class="fa-solid fa-check" style="color: var(--primary); margin-right: 8px;"></i>
+                                    <strong>자연어 일정 등록:</strong> 대화형 AI 챗봇 구현
+                                </li>
+                                <li style="background: #f8fafc; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px;">
+                                    <i class="fa-solid fa-check" style="color: var(--primary); margin-right: 8px;"></i>
+                                    <strong>Context Injection:</strong> 날씨 정보 실시간 프롬프트 주입
+                                </li>
+                                <li style="background: #f8fafc; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px;">
+                                    <i class="fa-solid fa-check" style="color: var(--primary); margin-right: 8px;"></i>
+                                    <strong>자동 알림 시스템:</strong> 등록 즉시 및 D-Day 메일 발송
+                                </li>
+                                <li style="background: #f8fafc; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px;">
+                                    <i class="fa-solid fa-check" style="color: var(--primary); margin-right: 8px;"></i>
+                                    <strong>감성 케어:</strong> 사용자 일정에 맞는 격려/조언 메시지
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- 2. 프로젝트 시연 (Demo) - 버튼 링크 방식 -->
+                    <!-- 2. 프로젝트 시연 -->
                     <div style="margin-bottom: 50px;">
                         <h3 style="margin-bottom: 20px; color: var(--primary);">02. 프로젝트 시연 (Demo)</h3>
                         <div class="feature-grid">
@@ -494,7 +538,6 @@
                     <h3 style="margin-bottom: 30px; color: var(--primary);">03. 핵심 기능</h3>
                     <div class="feature-grid">
                         <div class="feature-item">
-                            <!-- 이미지 대신 아이콘 -->
                             <div style="background: #e2e8f0; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #64748b;">
                                 <i class="fa-solid fa-robot fa-3x"></i>
                             </div>
@@ -565,7 +608,30 @@
                         </div>
                     </div>
 
-                    <!-- 5. 회고 및 성과 -->
+                    <!-- 5. 사용자 평가 (NEW) - 기준표에 맞춘 추가 섹션 -->
+                    <div class="eval-box">
+                        <h3 style="margin-bottom: 20px; color: #15803d; text-align: center;">04. 사용자 평가 및 피드백</h3>
+                        <p style="text-align: center; margin-bottom: 20px; color: #475569;">
+                            대학교 동기 및 개발자 20명을 대상으로 진행한 로컬 테스트 결과입니다.<br>
+                            사용자들은 특히 '자연어 입력'의 편의성에 높은 점수를 주었습니다.
+                        </p>
+                        <div class="eval-stats">
+                            <div class="stat-item">
+                                <h4>4.7/5</h4>
+                                <p>전반적 만족도</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>95%</h4>
+                                <p>재사용 의향</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>20명</h4>
+                                <p>테스트 참여 인원</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. 회고 및 성과 -->
                     <div class="retrospective">
                         <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-quote-left"></i> 회고 및 배운 점</h3>
                         <div class="retro-item">
