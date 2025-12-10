@@ -201,6 +201,14 @@
 
         .project-body { padding: 40px; }
 
+        .video-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--text-sub);
+            font-size: 15px;
+        }
+
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -220,17 +228,104 @@
         .feature-item p { color: var(--text-sub); }
 
         .architecture-box {
-            background: var(--bg-light);
+            background: var(--bg-white);
             padding: 40px;
             border-radius: 16px;
-            text-align: center;
+            border: 1px solid var(--border);
             margin-bottom: 60px;
         }
 
-        .architecture-box img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
+        /* Architecture Diagram Styles */
+        .arch-wrapper {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .arch-main-flow {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .arch-db-section {
+            flex: 1;
+            display: flex;
+        }
+
+        .arch-row {
+            display: flex;
+            align-items: stretch;
+            gap: 15px;
+        }
+
+        .arch-label-box {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        .arch-steps {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .arch-card {
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .arch-role {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .bg-front { background-color: #fef9c3; border: 1px solid #fde047; color: #854d0e; }
+        .bg-back { background-color: #ffedd5; border: 1px solid #fdba74; color: #9a3412; }
+        .bg-db { 
+            background-color: #ecfccb; 
+            border: 1px solid #bef264; 
+            color: #3f6212; 
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            text-align: center;
+        }
+
+        .arch-arrow {
+            display: none; /* Desktop grid handles layout */
+        }
+
+        @media (max-width: 768px) {
+            .arch-wrapper { flex-direction: column; }
+            .arch-row { flex-direction: column; border-bottom: 1px dashed var(--border); padding-bottom: 20px; }
+            .arch-row:last-child { border-bottom: none; }
+            .arch-label-box { width: 100%; flex-direction: row; gap: 5px; margin-bottom: 10px; }
+            .arch-steps { grid-template-columns: 1fr; }
+            .arch-db-section { height: auto; }
+            .bg-db { height: auto; padding: 20px; }
+            .about-grid, .feature-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 36px; }
+            .nav-links { display: none; } 
         }
 
         .retrospective {
@@ -291,12 +386,15 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <!-- 프로필 이미지 경로 수정 필요 -->
-    
+            <!-- 프로필 이미지 -->
             <h1>안녕하세요, <span class="highlight">이문규</span>입니다.</h1>
             <p class="tagline">생성형 AI와 공공데이터를 결합하여 사용자 경험을 혁신하는<br>문제 해결 중심의 풀스택 개발자</p>
             <div class="hero-btns">
                 <a href="#project" class="btn-primary">프로젝트 보기</a>
+                <!-- 발표자료 다운로드 버튼 추가 -->
+                <a href="presentation.html" download class="btn-secondary" style="color: #2563eb; border-color: #2563eb;">
+                    <i class="fa-solid fa-file-powerpoint"></i> 발표자료 다운로드
+                </a>
                 <a href="https://github.com/moonk3yu12/aiplan.git" target="_blank" class="btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
         </div>
@@ -357,37 +455,117 @@
                 </div>
 
                 <div class="project-body">
-                    <!-- 문제 및 해결 -->
+                    <!-- 1. 문제 및 해결 -->
                     <div style="margin-bottom: 50px;">
                         <h3 style="margin-bottom: 20px; color: var(--primary);">01. 문제 정의 및 해결책</h3>
                         <p style="margin-bottom: 10px;"><strong>⚠️ 문제점:</strong> 기존 캘린더 앱의 복잡한 입력 방식(날짜/시간 터치 설정)과 수동적인 알림으로 인한 잦은 일정 누락.</p>
                         <p><strong>💡 해결책:</strong> 자연어 대화형 AI 챗봇을 도입하여 입력 단계를 단축하고, 날씨 정보를 반영한 능동적 조언 기능 구현.</p>
                     </div>
 
-                    <!-- 핵심 기능 -->
-                    <h3 style="margin-bottom: 30px; color: var(--primary);">02. 핵심 기능</h3>
+                    <!-- 2. 프로젝트 시연 (Demo) - 버튼 링크 방식 -->
+                    <div style="margin-bottom: 50px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">02. 프로젝트 시연 (Demo)</h3>
+                        <div class="feature-grid">
+                            <!-- 최종 시연 영상 -->
+                            <div>
+                                <div style="background: #1e293b; aspect-ratio: 16/9; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 1px solid var(--border); transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    <i class="fa-brands fa-youtube fa-4x" style="color: #ef4444; margin-bottom: 20px;"></i>
+                                    <a href="https://youtu.be/Ur_ZMK8u7is" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                                        <i class="fa-solid fa-play"></i> 최종 시연 영상 보기
+                                    </a>
+                                </div>
+                                <div class="video-caption">📌 최종 시연 영상 (Final)</div>
+                            </div>
+                            
+                            <!-- 1차 시연 영상 -->
+                            <div>
+                                <div style="background: #e2e8f0; aspect-ratio: 16/9; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 1px solid var(--border); transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    <i class="fa-brands fa-youtube fa-4x" style="color: #64748b; margin-bottom: 20px;"></i>
+                                    <a href="https://youtu.be/F8GrgBBHZCw" target="_blank" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                                        <i class="fa-solid fa-play"></i> 1차 시연 영상 보기
+                                    </a>
+                                </div>
+                                <div class="video-caption">🎞️ 1차 시연 영상 (Prototype)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 핵심 기능 -->
+                    <h3 style="margin-bottom: 30px; color: var(--primary);">03. 핵심 기능</h3>
                     <div class="feature-grid">
                         <div class="feature-item">
-                            <!-- AI 챗봇 스크린샷 경로 수정 필요 -->
-                         
+                            <!-- 이미지 대신 아이콘 -->
+                            <div style="background: #e2e8f0; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #64748b;">
+                                <i class="fa-solid fa-robot fa-3x"></i>
+                            </div>
                             <h4>🤖 Context Injection 기반 챗봇</h4>
                             <p>실시간 기상 데이터와 시스템 페르소나를 결합한 동적 프롬프트를 생성합니다. "비가 오니 우산을 챙기세요"와 같은 맞춤형 조언을 제공합니다.</p>
                         </div>
                         <div class="feature-item">
-                            <!-- 알림 시스템 스크린샷 경로 수정 필요 -->
+                            <div style="background: #e2e8f0; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #64748b;">
+                                <i class="fa-regular fa-bell fa-3x"></i>
+                            </div>
                             <h4>🔔 Event-driven 알림 시스템</h4>
                             <p>Node-schedule을 활용한 백엔드 스케줄러. 일정 등록 즉시 확인 메일을 발송하고, D-Day/D-7 자정에 자동으로 리마인더를 발송합니다.</p>
                         </div>
                     </div>
 
-                    <!-- 아키텍처 -->
+                    <!-- 4. 아키텍처 -->
                     <div class="architecture-box">
-                        <h3 style="margin-bottom: 20px;">System Architecture</h3>
-                        <p>사용자 입력 → 프론트엔드 조율 → AI API(Context 주입) → DB 저장의 데이터 흐름도</p>
-                        <!-- 아키텍처 다이어그램 경로 수정 필요 -->
+                        <h3 style="margin-bottom: 10px; text-align: center;">System Architecture</h3>
+                        <p style="text-align: center; color: var(--text-sub); margin-bottom: 20px;">서비스의 데이터 흐름과 AI 통합 구조</p>
+                        
+                        <div class="arch-wrapper">
+                            <!-- Left Flow (Front & Back) -->
+                            <div class="arch-main-flow">
+                                <!-- Row 1: General Usage -->
+                                <div class="arch-row">
+                                    <div class="arch-label-box">
+                                        <span>일반<br>사용 예</span>
+                                    </div>
+                                    <div class="arch-steps">
+                                        <div class="arch-card bg-front">
+                                            <span class="arch-role">Front</span>
+                                            달력을 클릭하여<br>일정을 입력
+                                        </div>
+                                        <div class="arch-card bg-back">
+                                            <span class="arch-role">Back</span>
+                                            입력받은 정보 DB 호출,<br>저장 후 Front 응답
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Row 2: AI Usage -->
+                                <div class="arch-row">
+                                    <div class="arch-label-box">
+                                        <i class="fa-regular fa-star" style="color: #ef4444; margin-right: 4px;"></i>
+                                        <span>AI<br>활용 예</span>
+                                    </div>
+                                    <div class="arch-steps">
+                                        <div class="arch-card bg-front">
+                                            <span class="arch-role">Front</span>
+                                            사용자 명령어를<br>챗봇에 전달
+                                        </div>
+                                        <div class="arch-card bg-back">
+                                            <span class="arch-role">Back</span>
+                                            Gen AI API 호출하여<br>응답을 전달
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Flow (DB) -->
+                            <div class="arch-db-section">
+                                <div class="arch-card bg-db">
+                                    <i class="fa-solid fa-database fa-2x" style="margin-bottom: 10px; opacity: 0.5;"></i><br>
+                                    <span class="arch-role">DB</span>
+                                    Back 요청에 따라<br>데이터를 제공하거나<br>저장
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- 회고 및 성과 -->
+                    <!-- 5. 회고 및 성과 -->
                     <div class="retrospective">
                         <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-quote-left"></i> 회고 및 배운 점</h3>
                         <div class="retro-item">
@@ -416,7 +594,7 @@
                 프로젝트에 대해 더 궁금한 점이 있으시다면 언제든 연락 주세요.
             </p>
             <div class="contact-links">
-                <a href="moonk3yu12@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+                <a href="mailto:moonk3yu12@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
                 <a href="https://github.com/moonk3yu12/aiplan.git" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
             <p style="margin-top: 60px; font-size: 14px; opacity: 0.6;">
