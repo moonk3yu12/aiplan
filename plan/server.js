@@ -23,11 +23,19 @@ app.use(cors());
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
+// ★추가★: React 빌드 파일을 정적 파일로 제공
+app.use(express.static(path.join(__dirname, '..', 'build')));
+
 // --- API 라우트 연결 ---
 app.use('/api/auth', authRoutes);
 // (★핵심 수정★) '/api/memos' 경로의 요청을 'api.js' (memoRoutes)가 처리하도록 연결합니다.
 app.use('/api/memos', memoRoutes); 
 app.use('/api/ai', aiRoutes);
+
+// ★추가★: 모든 그 외 요청에 대해 index.html 반환 (React 라우팅 처리)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+});
 
 // --- 서버 실행 ---
 app.listen(PORT, async () => {

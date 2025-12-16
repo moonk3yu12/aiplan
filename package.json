@@ -27,11 +27,11 @@
     "util": "^0.12.5"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "node plan/server.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "server": "node plan/server.js"
+    "dev": "node plan/server.js"
   },
   "browserslist": {
     "production": [
